@@ -3,6 +3,8 @@ function onError(error) {
 }
 
 console.log(`AutoFullscreen Running`);
-browser.windows.getCurrent().then((currentWindow) => {
-	browser.windows.update(currentWindow.id, {state: "fullscreen"});
-});
+browser.windows.getAll().then((windowInfoArray) => {
+	for (currentWindow of windowInfoArray) {
+		browser.windows.update(currentWindow.id, {state: "fullscreen"});
+	}
+}, onError);
